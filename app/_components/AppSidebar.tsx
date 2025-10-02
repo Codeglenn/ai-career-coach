@@ -11,35 +11,35 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { Calendar, Inbox, Layers, UserCircleIcon, Wallet } from "lucide-react"
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 const items = [
     {
-        title: "Home",
+        title: "Workspace",
         url: "#",
-        icon: Home,
+        icon: Layers,
     },
     {
-        title: "Inbox",
+        title: "AI Tools",
         url: "#",
         icon: Inbox,
     },
     {
-        title: "Calendar",
+        title: "My History",
         url: "#",
         icon: Calendar,
     },
     {
-        title: "Search",
+        title: "Billing",
         url: "#",
-        icon: Search,
+        icon: Wallet,
     },
     {
-        title: "Settings",
+        title: "Profile",
         url: "#",
-        icon: Settings,
+        icon: UserCircleIcon,
     },
 ]
 
@@ -48,10 +48,22 @@ export function AppSidebar() {
     return (
         <Sidebar>
             <SidebarHeader>
-                <div className='p-4'>
-                    <Image src={'./logo.svg'} alt='logo' width={100} height={100}
-                        className='w-full h-full' />
-                    <h2 className='text-sm text-gray-400 text-center'>Build Awesome</h2>
+                <div className="p-2 flex items-center space-x-2">
+                    <Image
+                        src="/logo.png"
+                        alt="logo"
+                        width={50}
+                        height={50}
+                        className="object-contain"
+                    />
+                    <div className="flex flex-col mt-4">
+                        <span className="font-bold text-lg bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent drop-shadow-sm tracking-tight whitespace-nowrap">
+                        AI Career Coach
+                        </span>
+                        <h2 className="text-sm text-gray-400">
+                        Empowering Careers With AI
+                        </h2>
+                    </div>
                 </div>
             </SidebarHeader>
             <SidebarContent>
@@ -75,7 +87,7 @@ export function AppSidebar() {
                 </SidebarGroup>
             </SidebarContent>
             <SidebarFooter>
-                <h2 className='p-2 text-gray-400 text-sm'>Copyright @Tubeguruji</h2>
+                <h2 className='p-2 text-gray-400 text-sm'>Copyright @Kiruiglen</h2>
             </SidebarFooter>
         </Sidebar>
     )

@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-boilerplate-1",
+  "name": "AI-Career-Coach-Agent",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,7 +14,7 @@
     "@radix-ui/react-dialog": "^1.1.5",
     "@radix-ui/react-popover": "^1.1.5",
     "@radix-ui/react-separator": "^1.1.1",
-    "@radix-ui/react-slot": "^1.1.1",
+    "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tooltip": "^1.1.7",
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
