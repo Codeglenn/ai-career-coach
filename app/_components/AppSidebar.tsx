@@ -33,7 +33,7 @@ const items = [
     },
     {
         title: "Billing",
-        url: "#",
+        url: "/billing",
         icon: Wallet,
     },
     {
