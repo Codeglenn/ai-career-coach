@@ -18,12 +18,12 @@ import { usePathname } from 'next/navigation'
 const items = [
     {
         title: "Workspace",
-        url: "#",
+        url: "/dashboard",
         icon: Layers,
     },
     {
         title: "AI Tools",
-        url: "#",
+        url: "/ai-tools",
         icon: Inbox,
     },
     {

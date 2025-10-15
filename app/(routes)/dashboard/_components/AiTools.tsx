@@ -5,10 +5,10 @@ import AiToolCard from './AiToolCard'
 const aiToolsList=[
     {
         name:'AI Q&A Chatbot',
-        desc:'Chat With AI Agent',
+        desc:'Chat With AI Chatbot Agent',
         icon:'/chat-bot.png',
         button:'Let`s Chat',
-        path:'/ai-chat'
+        path:'/ai-tools/ai-chatbot'
     },
     {
         name:'AI Resume Analyzer',
