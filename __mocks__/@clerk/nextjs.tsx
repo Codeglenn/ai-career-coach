@@ -1,4 +1,6 @@
 // Mock for Clerk client-side hooks
+import React, { type ReactNode } from 'react';
+
 export const useUser = jest.fn(() => ({
   user: {
     id: 'test-user-id-123',
@@ -15,7 +17,7 @@ export const useUser = jest.fn(() => ({
   isSignedIn: true,
 }));
 
-export const SignedIn = ({ children }: { children: React.ReactNode }) => <>{children}</>;
-export const SignedOut = ({ children }: { children: React.ReactNode }) => null;
+export const SignedIn = ({ children }: { children: ReactNode }) => <>{children}</>;
+export const SignedOut = ({ children }: { children: ReactNode }) => null;
 export const UserButton = () => <div data-testid="user-button">User Button</div>;
 

@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from 'react'
+import React, { useEffect, type ReactNode } from 'react'
 import { useRouter } from 'next/navigation';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import axios from "axios";
@@ -9,7 +9,7 @@ import { AppSidebar } from '../_components/AppSidebar';
 function DashboardProvider({
     children,
 }: Readonly<{
-    children: React.ReactNode;
+    children: ReactNode;
 }>) {
 
     return (

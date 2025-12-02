@@ -2,13 +2,13 @@
 
 import { useUser } from '@clerk/nextjs';
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, type ReactNode } from 'react'
 
 
 function Provider({
     children,
 }: Readonly<{
-    children: React.ReactNode;
+    children: ReactNode;
 }>) {
 
     const { user } = useUser();

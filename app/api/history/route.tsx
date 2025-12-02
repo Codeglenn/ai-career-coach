@@ -38,12 +38,22 @@ export async function PUT(req:any){
 export async function GET(req:any){
     const {searchParams} = new URL(req.url);
     const recordId = searchParams.get('recordId');
+    const user = await currentUser();
+    const userEmail = user?.primaryEmailAddress?.emailAddress;
+    
     try{
         if (recordId) {
-        const result = await db.select().from(HistoryTable).where(eq(HistoryTable.recordId,recordId));
-        return NextResponse.json(result[0])
+            const result = await db.select().from(HistoryTable).where(eq(HistoryTable.recordId,recordId));
+            return NextResponse.json(result[0])
         }
-        return NextResponse.json({})
+        
+        // Fetch all history for current user
+        if (userEmail) {
+            const allHistory = await db.select().from(HistoryTable).where(eq(HistoryTable.userEmail, userEmail));
+            return NextResponse.json(allHistory)
+        }
+        
+        return NextResponse.json([])
     }catch(e){
         return NextResponse.json(e)
     }

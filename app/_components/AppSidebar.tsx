@@ -22,16 +22,6 @@ const items = [
         icon: Layers,
     },
     {
-        title: "AI Tools",
-        url: "/ai-tools",
-        icon: Inbox,
-    },
-    {
-        title: "My History",
-        url: "#",
-        icon: Calendar,
-    },
-    {
         title: "Billing",
         url: "/billing",
         icon: Wallet,

@@ -83,47 +83,70 @@ function AiChatbot() {
     }
 
     return (
-        <div className="flex flex-col h-screen">
+        <div className="flex flex-col h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-950 dark:to-gray-900">
             {/* Header */}
-            <div className="flex items-center justify-between px-4 py-1">
+            <div className="flex items-center justify-between px-6 py-4 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-sm">
                 <div>
-                    <h2 className="font-bold text-lg">AI Career Q&A Chatbot</h2>
-                    <p className="text-sm text-muted-foreground">Chat with our AI-powered career coach to get personalized advice and answers to your questions.</p>
+                    <h2 className="font-bold text-xl bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">AI Career Q&A Chatbot</h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Chat with our AI-powered career coach to get personalized advice and answers to your questions.</p>
                 </div>
-                <Button onClick={onNewChat}>+ New Chat</Button>
+                <Button onClick={onNewChat} className="bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 text-white">+ New Chat</Button>
             </div>
-            <div className='flex flex-col h-[75vh]'>
+            
+            <div className='flex flex-col h-[calc(100vh-120px)] overflow-hidden'>
                 {/* Empty state options */}
-               {(messageList?.length ?? 0) <= 0 && <div>
-                    <EmptyState selectedQuestion={(question:string)=>setUserInput(question)} />
-                </div>}
+                {(messageList?.length ?? 0) <= 0 && (
+                    <div className="flex-1 overflow-y-auto">
+                        <EmptyState selectedQuestion={(question:string)=>setUserInput(question)} />
+                    </div>
+                )}
 
                 {/* Message list */}
-                <div className="flex-1">
-                    {messageList?.map((message, index) => (
-                        <div key={index}>
-                            <div className={`flex mb-2 ${message.role=='user'?'justify-end':'justify-start'}`}>
-                                <div className={`p-3 rounded-lg gap-2 ${message.role=='user'?
-                                    'bg-gray-200 text-black rounded-lg':
-                                    "bg-gray-50 text-black"
-                                    }`}>
-                                    <Markdown>
-                                        {message.content}
-                                    </Markdown>
+                {(messageList?.length ?? 0) > 0 && (
+                    <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
+                        {messageList?.map((message, index) => (
+                            <div key={index}>
+                                <div className={`flex mb-3 ${message.role=='user'?'justify-end':'justify-start'}`}>
+                                    <div className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl ${message.role=='user'?
+                                        'bg-gradient-to-r from-blue-600 to-violet-600 text-white rounded-br-none shadow-md':
+                                        "bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-bl-none shadow-md border border-gray-200 dark:border-gray-700"
+                                        }`}>
+                                        <div className={message.role=='user' ? 'text-white' : ''}>
+                                            <Markdown>
+                                                {message.content}
+                                            </Markdown>
+                                        </div>
+                                    </div>
                                 </div>
+                                {loading && messageList?.length-1 === index && (
+                                    <div className='flex justify-start px-4 py-3 rounded-2xl gap-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 mb-3 shadow-md border border-gray-200 dark:border-gray-700 rounded-bl-none w-fit'>
+                                        <LoaderCircle className='animate-spin w-5 h-5 text-blue-600'/>
+                                        <span className='text-sm'>Thinking...</span>
+                                    </div>
+                                )}
                             </div>
-                            {loading && messageList?.length-1 === index && (
-                                <div className='flex justify-start p-3 rounded-lg gap-2 bg-gray-50 text-black mb-2'>
-                                    <LoaderCircle className='animate-spin'/>Thinking...
-                                </div>
-                            )}
-                        </div>
-                    ))}
-            
-                    {/*Input area */}
-                    <div className="flex justify-between items-center gap-3">
-                        <Input className="flex-1" placeholder="Type your message..." value={userInput} onChange={(event) => setUserInput(event.target.value)} />
-                        <Button onClick={onSend} disabled={loading} aria-label="Send"><Send /></Button>
+                        ))}
+                    </div>
+                )}
+        
+                {/*Input area */}
+                <div className="px-6 py-4 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+                    <div className="flex gap-3 items-center">
+                        <Input 
+                            className="flex-1 bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-700 rounded-full px-4 py-3 focus:ring-2 focus:ring-blue-600 focus:ring-offset-0" 
+                            placeholder="Type your message..." 
+                            value={userInput} 
+                            onChange={(event) => setUserInput(event.target.value)}
+                            onKeyPress={(e) => e.key === 'Enter' && !loading && onSend()}
+                        />
+                        <Button 
+                            onClick={onSend} 
+                            disabled={loading} 
+                            aria-label="Send"
+                            className="bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 text-white rounded-full p-3 h-auto"
+                        >
+                            <Send className='w-5 h-5' />
+                        </Button>
                     </div>
                 </div>
             </div>
