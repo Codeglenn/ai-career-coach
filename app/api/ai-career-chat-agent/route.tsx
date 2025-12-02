@@ -5,6 +5,11 @@ import { NextResponse } from "next/server";
 export async function POST(req:any) {
     const {userInput}=await req.json();
 
+    // Validate request body: if missing userInput, respond immediately
+    if (!userInput) {
+        return NextResponse.json({ error: 'Missing userInput' }, { status: 200 });
+    }
+
     const resultIds = await inngest.send({
         name:'AiCareerAgent',
         data:{

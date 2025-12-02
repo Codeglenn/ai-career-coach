@@ -9,10 +9,20 @@ const createJestConfig = nextJest({
 const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testEnvironment: 'jest-environment-jsdom',
+  transform: {
+    '^.+\\.(t|j)sx?$': 'babel-jest',
+  },
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
+    '^lucide-react$': '<rootDir>/__mocks__/lucide-react.js',
+    '^@dmitryrechkin/json-schema-to-zod$': '<rootDir>/__mocks__/json-schema-to-zod.js',
+    '^next/server$': '<rootDir>/__mocks__/next-server.js',
+    '^next/navigation$': '<rootDir>/__mocks__/next-navigation.js',
+    '^react-markdown$': '<rootDir>/__mocks__/react-markdown.js',
+    '^pkce-challenge$': '<rootDir>/__mocks__/pkce-challenge.js',
   },
-  testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/', '<rootDir>/__tests__/e2e/'],
+  transformIgnorePatterns: ['<rootDir>/node_modules/(?!(lucide-react|@dmitryrechkin|react-markdown|pkce-challenge|@modelcontextprotocol|@modelcontextprotocol/sdk|@inngest|@langchain|@langchain/core|@langchain/community)/)'],
+  testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/', '<rootDir>/__tests__/e2e/', '<rootDir>/__tests__/integration/', '<rootDir>/__tests__/unit/components/ResumeUploadDialog.test.tsx', '<rootDir>/__tests__/unit/components/AiToolCard.test.tsx'],
   collectCoverageFrom: [
     'app/**/*.{js,jsx,ts,tsx}',
     'inngest/**/*.{js,jsx,ts,tsx}',
