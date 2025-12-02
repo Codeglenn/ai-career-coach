@@ -8,6 +8,7 @@ import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import ResumeUploadDialog from './ResumeUploadDialog';
+import CareerRoadmapDialog from '@/app/(routes)/dashboard/_components/CareerRoadmapDialog';
 
 interface TOOL{
     name: string,
@@ -26,11 +27,17 @@ function AiToolCard({ tool }: AIToolProps) {
     const {user} = useUser();
     const router = useRouter();
     const [openResumeUpload, setOpenResumeUpload] = React.useState(false);
+    const [openCareerRoadmap, setOpenCareerRoadmap] = React.useState(false);
 
     const onClickButton=async()=>{
 
         if(tool.name=='AI Resume Analyzer'){
             setOpenResumeUpload(true);
+            return;
+        }
+
+        if(tool.path==='/ai-tools/career-roadmap-generator'){
+            setOpenCareerRoadmap(true);
             return;
         }
 
@@ -60,6 +67,10 @@ function AiToolCard({ tool }: AIToolProps) {
             </Button>
             <ResumeUploadDialog openResumeUpload={openResumeUpload}
             setOpenResumeDialog={setOpenResumeUpload} />
+            <CareerRoadmapDialog 
+                openCareerRoadmap={openCareerRoadmap}
+                setOpenCareerRoadmap={setOpenCareerRoadmap}
+            />
         </div>
     );
 }

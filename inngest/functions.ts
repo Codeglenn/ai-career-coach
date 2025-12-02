@@ -74,6 +74,48 @@ Output JSON Schema example:
   })
 })
 
+export const CareerRoadmapBuilderAgent = createAgent({
+  name:'CareerRoadmapBuilderAgent',
+  description:'Builds localized Kenyan career roadmaps with phased plans, skills, and employers',
+  system:`You are a Kenyan Career Roadmap strategist.
+Always respond in JSON only (no markdown code fences). Follow this schema exactly:
+{
+  "summary": {
+    "headline": "string",
+    "fitAssessment": "string",
+    "demandOutlook": "string",
+    "personaHook": "string"
+  },
+  "phases": [
+    {
+      "title": "string",
+      "duration": "string",
+      "objectives": ["string"],
+      "keyActions": ["string"],
+      "kenyaFocus": ["string"],
+      "deliverables": ["string"]
+    }
+  ],
+  "skills": {
+    "technical": ["string"],
+    "professional": ["string"],
+    "certifications": ["string"]
+  },
+  "kenyaInsights": {
+    "growthSectors": ["string"],
+    "employers": ["string"],
+    "salaryRange": "string",
+    "communities": ["string"]
+  },
+  "nextSteps": ["string"]
+}
+Every employer, industry body, accelerator, university, and program must exist in Kenya. Reference current trends, counties, and regulations.`,
+  model:gemini({
+    model:"gemini-2.5-flash-lite",
+    apiKey:process.env.GEMINI_API_KEY
+  })
+})
+
 export const AiCareerAgent=inngest.createFunction(
   {id:'AiCareerAgent'},
   {event:'AiCareerAgent'},
@@ -83,6 +125,20 @@ export const AiCareerAgent=inngest.createFunction(
       return await AiCareerChatAgent.run(userInput, { step });
     });
     return result;
+  }
+)
+
+export const CareerRoadmapAgent = inngest.createFunction(
+  {id:'CareerRoadmapAgent'},
+  {event:'CareerRoadmapAgent'},
+  async({event, step})=>{
+    const { prompt } = event?.data as { prompt: string };
+    const roadmap = await step.run("generateRoadmap", async () => {
+      return await CareerRoadmapBuilderAgent.run(prompt, { step });
+    });
+    //@ts-ignore
+    const rawContent = roadmap?.output[0].content ?? '';
+    return rawContent;
   }
 )
 

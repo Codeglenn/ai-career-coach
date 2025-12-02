@@ -1,6 +1,6 @@
 import { serve } from "inngest/next";
 import { inngest } from "../../../inngest/client";
-import { AiCareerAgent, AiResumeAgent } from "@/inngest/functions";
+import { AiCareerAgent, AiResumeAgent, CareerRoadmapAgent } from "@/inngest/functions";
 
 export const runtime = "nodejs";
 
@@ -10,6 +10,7 @@ export const { GET, POST, PUT } = serve({
   functions: [
     /* your functions will be passed here later! */
     AiCareerAgent,
-    AiResumeAgent
+    AiResumeAgent,
+    CareerRoadmapAgent
   ],
 });
