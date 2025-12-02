@@ -22,7 +22,7 @@ const customJestConfig = {
     '^pkce-challenge$': '<rootDir>/__mocks__/pkce-challenge.js',
   },
   transformIgnorePatterns: ['<rootDir>/node_modules/(?!(lucide-react|@dmitryrechkin|react-markdown|pkce-challenge|@modelcontextprotocol|@modelcontextprotocol/sdk|@inngest|@langchain|@langchain/core|@langchain/community)/)'],
-  testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/', '<rootDir>/__tests__/e2e/', '<rootDir>/__tests__/integration/', '<rootDir>/__tests__/unit/components/ResumeUploadDialog.test.tsx', '<rootDir>/__tests__/unit/components/AiToolCard.test.tsx'],
+  testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/', '<rootDir>/__tests__/e2e/'],
   collectCoverageFrom: [
     'app/**/*.{js,jsx,ts,tsx}',
     'inngest/**/*.{js,jsx,ts,tsx}',
