@@ -22,11 +22,6 @@ const items = [
         icon: Layers,
     },
     {
-        title: "Billing",
-        url: "/billing",
-        icon: Wallet,
-    },
-    {
         title: "Profile",
         url: "/profile",
         icon: UserCircleIcon,
