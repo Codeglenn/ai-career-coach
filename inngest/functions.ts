@@ -116,9 +116,11 @@ Every employer, industry body, accelerator, university, and program must exist i
   })
 })
 
+
 export const AiCareerAgent=inngest.createFunction(
   {id:'AiCareerAgent'},
   {event:'AiCareerAgent'},
+  //@ts-ignore
   async({event, step})=>{
     const {userInput}=await event?.data;
     const result = await step.run("analyzeCareerQuestion", async () => {
@@ -131,6 +133,7 @@ export const AiCareerAgent=inngest.createFunction(
 export const CareerRoadmapAgent = inngest.createFunction(
   {id:'CareerRoadmapAgent'},
   {event:'CareerRoadmapAgent'},
+  //@ts-ignore
   async({event, step})=>{
     const { prompt } = event?.data as { prompt: string };
     const roadmap = await step.run("generateRoadmap", async () => {
@@ -154,6 +157,7 @@ var imagekit = new ImageKit({
 export const AiResumeAgent = inngest.createFunction(
   {id:'AiResumeAgent'},
   {event:'AiResumeAgent'},
+  //@ts-ignore
   async({event, step})=> {
     const {recordId, base64ResumeFile, pdfText, aiAgentType, userEmail}=await event?.data;
     //Upload resume file to cloud
